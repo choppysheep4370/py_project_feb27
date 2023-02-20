@@ -28,16 +28,45 @@ class Node:
             last_node = new_node
 
 
-''' 
-       new_node = Node(data)
+    def insertNode(findData, insertData): # f: 9 / i: 99
+        global node1
 
-        current = node1
-        while current.next != None: # 마지막 노드
+        if node1.data == findData: # node1.data : 7 == findData 9 해당없음
+            node = Node(insertData, node1)
+            node1 = node
+            return
+
+        current = node1             # c.data : 7 / c.next: 3
+        while current.next != None:
+            pre = current
+                                    # p.data : 7|3 / p.next : 3|9
             current = current.next
+                                    # c.data : 3|9 / c.next : 9|1
+            if current.data == finddata:  # c.data : 3|9 == f.data : 9|9
+                node = Node(insertData, current)    # idata : 99, 9(주소값)
+                pre.next = node     # p.data : 3 / p.next 9(주소값) -> 99(주소값으로 변경)
+                return
 
-        current.next = new_node
-'''
+        node = Node(insertData)
+        current.next = node
 
+    def delete(del_data):
+        global node1
+        pre_node = node1
+        next_node = pre_node.next
+
+        if pre_node.data == del_data:
+            node1 = next_node
+            del pre_node
+            return
+
+        while next_node:
+            if next_node.data == del_data:
+                pre_node.next = next_node.next
+                del next_node
+                break
+            pre_node = next_node
+            next_node = next_node.next
 
 
     def print_list(): # 연결 리스트의 데이터를 출력한다.
